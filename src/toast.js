@@ -8,8 +8,8 @@ require('./toast.css');
 
 var $ = require('jquery');
 
-var wrap; // 提示条外层包裹
 var mask; // 锁屏
+var wrap; // 提示条外层包裹
 var inner; // 内容包裹
 var timer; // 计时器id
 var instance = null; // 实例堆栈
