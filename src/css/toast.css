@@ -3,9 +3,9 @@
   font-family: icomoon;
   src: /* IE9 */ url("../fonts/icomoon.eot");
   src: /* IE6-IE8 */ url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"),
-    /* chrome、firefox */ url("../fonts/icomoon.woff") format("woff"),
+    /* iOS 4.1- */ url("../fonts/icomoon.svg#icomoon") format("svg"),
     /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */ url("../fonts/icomoon.ttf") format("truetype"),
-    /* iOS 4.1- */ url("../fonts/icomoon.svg#icomoon") format("svg");
+    /* chrome、firefox */ url("../fonts/icomoon.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -16,20 +16,12 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  /* Enable Ligatures */
-  -webkit-font-feature-settings: "liga";
-  -moz-font-feature-settings: "liga=1";
-  -moz-font-feature-settings: "liga";
-  -ms-font-feature-settings: "liga" 1;
-  -o-font-feature-settings: "liga";
-  font-feature-settings: "liga";
   /* Better Font Rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* min font size */
   -webkit-text-size-adjust: none;
   -ms-text-size-adjust: none;
-  -webkit-text-stroke-width: 0.2px;
 }
 /* icon font */
 
