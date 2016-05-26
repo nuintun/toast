@@ -24,24 +24,23 @@ function Toast(options){
   }
 
   options = $.extend({
-    type: 'loading',
-    lock: false,
-    message: '言宜慢，心宜善。',
-    timeout: 3,
-    position: ''
+    lock: true,
+    type: 'smile',
+    timeout: 3000,
+    message: '言宜慢，心宜善。'
   }, options);
 
   this.toast = $(
     '<div class="ui-toast">' +
     '  <div>' +
-    '    <div class="ui-toast-message ui-toast-' + options.type + '">' + options.message + '</div>' +
+    '    <div class="ui-toast-message ui-toast-type-' + options.type + '">' + options.message + '</div>' +
     '  </div>' +
     '</div>'
   );
 
   this.toast.appendTo(document.body);
 
-  this.lock();
+  options.lock && this.lock();
 }
 
 Toast.prototype = {
