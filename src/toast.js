@@ -7,6 +7,7 @@
 require('./css/toast.css');
 
 var $ = require('./jquery');
+var GUID = new Date().getTime();
 
 var Mask = {
   reference: 0,
@@ -27,12 +28,45 @@ var Mask = {
   }
 };
 
+var Cache = {
+  cache: {},
+  key: function (key){
+    return 'Toast-ID-' + key;
+  },
+  add: function (key, value){
+    key = Cache.key(key);
+
+    Cache.cache[key] = value;
+  },
+  remove: function (key){
+    key = Cache.key(key);
+
+    delete Cache.cache[key];
+  },
+  has: function (key){
+    key = Cache.key(key);
+
+    return Cache.cache.hasOwnProperty(key);
+  },
+  get: function (key){
+    key = Cache.key(key);
+
+    return Cache.cache[key]
+  }
+};
+
 function Toast(message, options){
   message = message || '言宜慢，心宜善。';
-  options = $.extend({ lock: false, type: 'loading', timeout: 3000 }, options);
+  options = $.extend({ id: GUID, lock: false, type: 'info', timeout: 3000 }, options);
+  options.timeout = Math.abs(options.timeout) >>> 0;
+
+  if (Cache.has(options.id)) {
+    Cache.get(options.id).hide();
+  }
 
   this.locked = false;
   this.options = options;
+  this.visibility = false;
 
   this.toast = $(
     '<div class="ui-toast">' +
@@ -43,6 +77,8 @@ function Toast(message, options){
   );
 
   this.show();
+
+  Cache.add(options.id, this);
 }
 
 Toast.prototype = {
@@ -63,14 +99,34 @@ Toast.prototype = {
     return this;
   },
   show: function (){
-    this.options.lock && this.lock();
-    this.toast.appendTo(document.body);
+    if (!this.visibility) {
+      var context = this;
+
+      this.options.lock && this.lock();
+      this.toast.appendTo(document.body);
+
+      this.visibility = true;
+
+      if (this.options.timeout > 0) {
+        clearTimeout(this.timeout);
+
+        this.timeout = setTimeout(function (){
+          context.hide();
+        }, this.options.timeout);
+      }
+    }
 
     return this;
   },
   hide: function (){
-    this.unlock();
-    this.toast.remove();
+    if (this.visibility) {
+      this.unlock();
+      this.toast.remove();
+
+      this.visibility = false;
+    }
+
+    clearTimeout(this.timeout);
 
     return this;
   }
@@ -83,7 +139,11 @@ Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
 
-new Toast().lock();
+new Toast('正在加载数据...', { lock: true, type: 'loading' });
+
+setTimeout(function (){
+  new Toast('言宜慢，心宜善。', { type: 'success' });
+}, 2000);
 
 // 公开接口
 module.exports = Toast;
