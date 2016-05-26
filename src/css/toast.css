@@ -14,44 +14,27 @@
   padding: 0;
   pointer-events: visiblepainted;
 }
-.ui-toast .ui-toast-content {
+.ui-toast-message {
   margin: 0;
-  padding: 7px 10px;
+  padding: 7px 10px 7px 44px;
   color: #222;
   border: 1px solid #f0c36d;
   border-radius: 2px;
-  background: #f9edbe;
   box-shadow: 0 0 4px rgba(0, 0, 0, .2);
-  white-space: nowrap;
-  word-break: keep-all;
-}
-.ui-toast .ui-toast-message {
-  display: inline-block;
-  *display: inline; *zoom: 1;
-  vertical-align: middle;
-  padding: 0;
-  margin: 0 1px 0 0;
+  background: #f9edbe no-repeat 10px center;
   max-width: 606px;
   font-size: 15px;
   font-weight: bold;
   line-height: 24px;
-  white-space: normal;
-  word-break: normal;
 }
-.ui-toast-icon {
-  display: inline-block;
-  *display: inline; *zoom: 1;
-  vertical-align: middle;
-  width: 24px; height: 24px;
-}
-.ui-toast-info { background: url(../images/info.png) no-repeat center; }
-.ui-toast-success { background: url(../images/success.png) no-repeat center; }
-.ui-toast-error { background: url(../images/error.png) no-repeat center; }
-.ui-toast-warn { background: url(../images/warn.png) no-repeat center; }
-.ui-toast-ask { background: url(../images/ask.png) no-repeat center; }
-.ui-toast-lock { background: url(../images/lock.png) no-repeat center; }
-.ui-toast-sad { background: url(../images/sad.png) no-repeat center; }
-.ui-toast-smile { background: url(../images/smile.png) no-repeat center; }
+.ui-toast-info { background-image: url(../images/info.png); }
+.ui-toast-success { background-image: url(../images/success.png); }
+.ui-toast-error { background-image: url(../images/error.png); }
+.ui-toast-warn { background-image: url(../images/warn.png); }
+.ui-toast-ask { background-image: url(../images/ask.png); }
+.ui-toast-lock { background-image: url(../images/lock.png); }
+.ui-toast-sad { background-image: url(../images/sad.png); }
+.ui-toast-smile { background-image: url(../images/smile.png); }
 .ui-toast-mask {
   width: 100%;
   height: 100%;
