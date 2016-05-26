@@ -117,10 +117,11 @@ Toast.prototype = {
         }, this.options.timeout);
       }
 
-      this.events.show = this.events.show
-        || $.Callbacks('memory stopOnFalse');
+      var args = [].slice.call(arguments, 0);
 
-      this.events.show.fireWith(this, arguments);
+      args.unshift('show');
+
+      this.emit.apply(this, args);
     }
 
     return this;
@@ -134,10 +135,11 @@ Toast.prototype = {
 
       clearTimeout(this.timer);
 
-      this.events.hide = this.events.hide
-        || $.Callbacks('memory stopOnFalse');
+      var args = [].slice.call(arguments, 0);
 
-      this.events.hide.fireWith(this, arguments);
+      args.unshift('hide');
+
+      this.emit.apply(this, args);
     }
 
     return this;
@@ -164,6 +166,16 @@ Toast.prototype = {
         }
         break;
     }
+
+    return this;
+  },
+  emit: function (event){
+    var data = [].slice.call(arguments, 1);
+
+    this.events[event] = this.events[event]
+      || $.Callbacks('memory stopOnFalse');
+
+    this.events[event].fireWith(this, data);
 
     return this;
   }
