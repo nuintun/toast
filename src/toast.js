@@ -8,7 +8,24 @@ require('./css/toast.css');
 
 var $ = require('./jquery');
 
-var mask = $('<div class="ui-toast-mask"></div>');
+var Mask = {
+  reference: 0,
+  mask: $('<div class="ui-toast-mask"></div>'),
+  show: function (){
+    if (Mask.reference === 0) {
+      Mask.mask.appendTo(document.body);
+    }
+
+    Mask.reference++;
+  },
+  hide: function (){
+    Mask.reference--;
+
+    if (Mask.reference === 0) {
+      Mask.mask.remove();
+    }
+  }
+};
 
 function Toast(options){
   // 参数是字符串直接显示
@@ -24,7 +41,7 @@ function Toast(options){
   }
 
   options = $.extend({
-    lock: true,
+    lock: false,
     type: 'loading',
     timeout: 3000,
     message: '言宜慢，心宜善。'
@@ -38,23 +55,38 @@ function Toast(options){
     '</div>'
   );
 
-  this.toast.appendTo(document.body);
-
-  options.lock && this.lock();
+  this.locked = false;
+  this.options = options;
 }
 
 Toast.prototype = {
   lock: function (){
-    mask.appendTo(document.body);
+    Mask.show();
+
+    this.locked = true;
+
+    return this;
   },
   unlock: function (){
-    mask.remove();
+    if (this.locked) {
+      Mask.hide();
+
+      this.locked = false;
+    }
+
+    return this;
   },
   show: function (){
+    this.options.lock && this.lock();
+    this.toast.appendTo(document.body);
 
+    return this;
   },
   hide: function (){
+    this.unlock();
+    this.toast.remove();
 
+    return this;
   }
 };
 
@@ -65,7 +97,7 @@ Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
 
-new Toast();
+new Toast().show().lock();
 
 // 公开接口
 module.exports = Toast;
