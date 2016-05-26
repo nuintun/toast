@@ -377,7 +377,7 @@ gulp.task('product', ['runtime-product'], function (){
       ignore: ['jquery'],
       plugins: CMDPLUGINS,
       include: function (id){
-        return id && id.indexOf('view') === 0 ? 'all' : 'self';
+        return id && id.indexOf('toast') === 0 ? 'all' : 'self';
       },
       css: {
         onpath: onpath
