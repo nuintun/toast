@@ -15,9 +15,8 @@
   pointer-events: visiblepainted;
 }
 .ui-toast-message {
-  margin: 0;
   padding: 7px 10px 7px 44px;
-  color: #222;
+  margin: 0; color: #222;
   border: 1px solid #f0c36d;
   border-radius: 2px;
   box-shadow: 0 0 4px rgba(0, 0, 0, .2);
