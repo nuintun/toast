@@ -26,8 +26,8 @@ function Toast(options){
   options = $.extend({
     type: 'info',
     lock: false,
-    message: '',
-    autoClose: 3,
+    message: 'Hello Toast !',
+    timeout: 3,
     position: ''
   }, options);
 
@@ -35,12 +35,16 @@ function Toast(options){
     '<div class="ui-toast">' +
     '  <div>' +
     '    <div class="ui-toast-content">' +
-    '      <i class="ui-toast-' + type + '"></i>' +
-    '      <div class="ui-toast-message">' + message + '</div>' +
+    '      <i class="ui-toast-' + options.type + '"></i>' +
+    '      <div class="ui-toast-message">' + options.message + '</div>' +
     '    </div>' +
     '  </div>' +
     '</div>'
   );
+
+  this.toast.appendTo(document.body);
+
+  this.lock();
 }
 
 Toast.prototype = {
@@ -64,6 +68,8 @@ Toast.warn = '';
 Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
+
+new Toast();
 
 // 公开接口
 module.exports = Toast;
