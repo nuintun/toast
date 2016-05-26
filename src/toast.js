@@ -24,9 +24,9 @@ function Toast(options){
   }
 
   options = $.extend({
-    type: 'info',
+    type: 'success',
     lock: false,
-    message: 'Hello Toast !',
+    message: '言宜慢，心宜善。',
     timeout: 3,
     position: ''
   }, options);
@@ -35,7 +35,7 @@ function Toast(options){
     '<div class="ui-toast">' +
     '  <div>' +
     '    <div class="ui-toast-content">' +
-    '      <i class="ui-toast-' + options.type + '"></i>' +
+    '      <i class="ui-toast-icon ui-toast-' + options.type + '"></i>' +
     '      <div class="ui-toast-message">' + options.message + '</div>' +
     '    </div>' +
     '  </div>' +
