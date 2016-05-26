@@ -1,10 +1,10 @@
-/* 提示tip */
 .ui-toast {
   position: fixed;
   background: none repeat scroll 0 0 transparent;
   top: 20px; left: 50%;
   margin: 0; padding: 0;
   pointer-events: none;
+  z-index: 2147483647;
 }
 .ui-toast > div {
   position: relative;
@@ -48,6 +48,8 @@
   height: 100%;
   position: fixed;
   top: 0; left: 0;
-  background-image: url(../images/background_stripe.png);
+  background: #333 url(../images/background_stripe.png);
+  opacity: .65; z-index: 2147483646;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
 }
-/* /提示tip */
