@@ -182,9 +182,9 @@ Toast.loading = '';
 
 new Toast('正在加载数据...', { lock: true, type: 'loading' }).on('hide', function (){
   new Toast('言宜慢，心宜善。', { type: 'success' }).on('show', function (){
-    console.log('show-1', '言宜慢，心宜善。');
-  }).on('show', function (){
-    console.log('show-2', '言宜慢，心宜善。');
+    console.log('显示', '言宜慢，心宜善。');
+  }).on('hide', function (){
+    console.log('隐藏', '言宜慢，心宜善。');
   });
 });
 
