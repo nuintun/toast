@@ -26,7 +26,7 @@ function Toast(options){
   options = $.extend({
     type: 'sad',
     lock: false,
-    message: '言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。言宜慢，心宜善。',
+    message: '言宜慢，心宜善。',
     timeout: 3,
     position: ''
   }, options);
