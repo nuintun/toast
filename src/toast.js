@@ -80,7 +80,7 @@ function Toast(message, options){
     '</div>'
   );
 
-  this.show();
+  this.show('init');
 }
 
 Toast.prototype = {
@@ -113,7 +113,7 @@ Toast.prototype = {
         clearTimeout(this.timer);
 
         this.timer = setTimeout(function (){
-          context.hide();
+          context.hide('timeout');
         }, this.options.timeout);
       }
 
@@ -194,9 +194,9 @@ Toast.loading = '';
 
 new Toast('正在加载数据...', { lock: true, type: 'loading' }).on('hide', function (){
   new Toast('言宜慢，心宜善。', { type: 'success' }).on('show', function (){
-    console.log('显示', '言宜慢，心宜善。');
+    console.log('显示', '言宜慢，心宜善。', arguments[0]);
   }).on('hide', function (){
-    console.log('隐藏', '言宜慢，心宜善。');
+    console.log('隐藏', '言宜慢，心宜善。', arguments[0]);
   });
 });
 
