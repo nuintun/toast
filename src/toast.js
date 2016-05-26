@@ -6,9 +6,7 @@
 
 require('./css/toast.css');
 
-console.log(require);
-
-var $ = require('jquery');
+var $ = require('./jquery');
 
 var mask = $('<div class="ui-toast-mask"></div>');
 

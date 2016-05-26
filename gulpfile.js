@@ -32,9 +32,7 @@ var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
 var switchStream = require('switch-stream');
 var bookmark = Date.now();
-var runtime = [
-  'src/sea.js'
-];
+var runtime = ['src/sea.js'];
 
 // compress javascript file
 function compress(){
