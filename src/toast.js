@@ -80,7 +80,7 @@ function Toast(message, options){
     '</div>'
   );
 
-  this.show('init');
+  this.show('INITIALIZE');
 }
 
 Toast.prototype = {
@@ -113,7 +113,7 @@ Toast.prototype = {
         clearTimeout(this.timer);
 
         this.timer = setTimeout(function (){
-          context.hide('timeout');
+          context.hide('TIMEOUT');
         }, this.options.timeout);
       }
 
