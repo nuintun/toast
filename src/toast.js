@@ -27,36 +27,22 @@ var Mask = {
   }
 };
 
-function Toast(options){
-  // 参数是字符串直接显示
-  if ($.type(options) === 'string') {
-    options = {
-      message: arguments[0]
-    };
+function Toast(message, options){
+  message = message || '言宜慢，心宜善。';
+  options = $.extend({ lock: false, type: 'loading', timeout: 3000 }, options);
 
-    // 第二个参数是对象合并参数
-    if ($.type(arguments[1]) === 'object') {
-      options = $.extend(options, arguments[1]);
-    }
-  }
-
-  options = $.extend({
-    lock: false,
-    type: 'loading',
-    timeout: 3000,
-    message: '言宜慢，心宜善。'
-  }, options);
+  this.locked = false;
+  this.options = options;
 
   this.toast = $(
     '<div class="ui-toast">' +
     '  <div>' +
-    '    <div class="ui-toast-message ui-toast-type-' + options.type + '">' + options.message + '</div>' +
+    '    <div class="ui-toast-message ui-toast-type-' + options.type + '">' + message + '</div>' +
     '  </div>' +
     '</div>'
   );
 
-  this.locked = false;
-  this.options = options;
+  this.show();
 }
 
 Toast.prototype = {
@@ -97,7 +83,7 @@ Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
 
-new Toast().show().lock();
+new Toast().lock();
 
 // 公开接口
 module.exports = Toast;
