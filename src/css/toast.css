@@ -8,10 +8,8 @@
 }
 .ui-toast > div {
   position: relative;
-  right: 50%;
-  top: 0;
-  margin: 0;
-  padding: 0;
+  top: 0; right: 50%;
+  margin: 0; padding: 0;
   pointer-events: visiblepainted;
 }
 .ui-toast-message {
