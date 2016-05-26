@@ -64,7 +64,11 @@ function Toast(message, options){
     Cache.get(options.id).hide();
   }
 
+  Cache.add(options.id, this);
+
+  this.events = {};
   this.locked = false;
+  this.id = options.id;
   this.options = options;
   this.visibility = false;
 
@@ -77,8 +81,6 @@ function Toast(message, options){
   );
 
   this.show();
-
-  Cache.add(options.id, this);
 }
 
 Toast.prototype = {
@@ -108,12 +110,17 @@ Toast.prototype = {
       this.visibility = true;
 
       if (this.options.timeout > 0) {
-        clearTimeout(this.timeout);
+        clearTimeout(this.timer);
 
-        this.timeout = setTimeout(function (){
+        this.timer = setTimeout(function (){
           context.hide();
         }, this.options.timeout);
       }
+
+      this.events.show = this.events.show
+        || $.Callbacks('memory stopOnFalse');
+
+      this.events.show.fireWith(this, arguments);
     }
 
     return this;
@@ -124,12 +131,46 @@ Toast.prototype = {
       this.toast.remove();
 
       this.visibility = false;
+
+      clearTimeout(this.timer);
+
+      this.events.hide = this.events.hide
+        || $.Callbacks('memory stopOnFalse');
+
+      this.events.hide.fireWith(this, arguments);
     }
 
-    clearTimeout(this.timeout);
+    return this;
+  },
+  on: function (event, handler){
+    this.events[event] = this.events[event]
+      || $.Callbacks('memory stopOnFalse');
+
+    this.events[event].add(handler);
+
+    return this;
+  },
+  off: function (event, handler){
+    switch (arguments.length) {
+      case 0:
+        this.events = {};
+        break;
+      case 1:
+        delete this.events[event];
+        break;
+      default:
+        if (this.events[event]) {
+          this.events[event].remove(handler);
+        }
+        break;
+    }
 
     return this;
   }
+};
+
+Toast.query = function (id){
+  return Cache.get(id);
 };
 
 Toast.info = '';
@@ -139,11 +180,13 @@ Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
 
-new Toast('正在加载数据...', { lock: true, type: 'loading' });
-
-setTimeout(function (){
-  new Toast('言宜慢，心宜善。', { type: 'success' });
-}, 2000);
+new Toast('正在加载数据...', { lock: true, type: 'loading' }).on('hide', function (){
+  new Toast('言宜慢，心宜善。', { type: 'success' }).on('show', function (){
+    console.log('show-1', '言宜慢，心宜善。');
+  }).on('show', function (){
+    console.log('show-2', '言宜慢，心宜善。');
+  });
+});
 
 // 公开接口
 module.exports = Toast;
