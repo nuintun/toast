@@ -48,7 +48,7 @@
   height: 100%;
   position: fixed;
   top: 0; left: 0;
-  background: #333 url(../images/background_stripe.png);
+  background: #fff;
   opacity: .65; z-index: 2147483646;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
