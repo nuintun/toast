@@ -305,7 +305,7 @@ gulp.task('watch', ['default'], function (){
       '  %s %s: %s %s',
       colors.green.bold('gulp-watch'),
       event,
-      colors.magenta(join('Assets', path).replace(/\\/g, '/')),
+      colors.magenta(join('src', path).replace(/\\/g, '/')),
       colors.green('+' + (now - bookmark) + 'ms')
     );
   }
@@ -327,12 +327,12 @@ gulp.task('watch', ['default'], function (){
     'src/**/*',
     '!src/sea.js'
   ], function (event, path){
-    var rpath = relative(join(base, 'src'), path);
+    var rpath = relative(join(base, ''), path);
 
     bookmark = Date.now();
     event = event.toLowerCase();
 
-    debugWatcher(event, join('src', rpath));
+    debugWatcher(event, join('', rpath));
 
     if (event === 'unlink' || event === 'unlinkdir') {
       rimraf.sync(resolve('examples', rpath));
