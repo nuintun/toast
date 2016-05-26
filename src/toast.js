@@ -24,7 +24,7 @@ function Toast(options){
   }
 
   options = $.extend({
-    type: 'sad',
+    type: 'loading',
     lock: false,
     message: '言宜慢，心宜善。',
     timeout: 3,
