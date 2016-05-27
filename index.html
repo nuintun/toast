@@ -19,9 +19,14 @@
   </head>
   <body>
     <script type="text/javascript">
+      if (!console) {
+        console.log = function (){};
+      }
+
       seajs.config({
         base: './examples'
       });
+
       seajs.use('./examples/toast', function (Toast){
         new Toast('正在加载数据...', { lock: true, type: 'loading' }).on('hide', function (){
           new Toast('言宜慢，心宜善。', { type: 'success' }).on('show', function (){
