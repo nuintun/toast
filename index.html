@@ -28,17 +28,13 @@
       });
 
       seajs.use('./examples/toast', function (Toast){
-        var loading = Toast.loading('正在加载数据...', { timeout: false, lock: true }).on('hide', function (){
+        Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
           Toast.success('言宜慢，心宜善。').on('show', function (){
             console.log('显示：', '言宜慢，心宜善。', '>>>', '触发对象：', arguments[0]);
           }).on('hide', function (){
             console.log('隐藏：', '言宜慢，心宜善。', '>>>', '触发对象：', arguments[0]);
           });
         });
-
-        setTimeout(function (){
-          loading.hide();
-        }, 300);
       });
     </script>
   </body>
