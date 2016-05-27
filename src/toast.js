@@ -179,16 +179,13 @@ Toast.prototype = {
   }
 };
 
-Toast.query = function (id){
-  return Cache.get(id);
-};
+Toast.query = Cache.get;
 
-Toast.info = '';
-Toast.ask = '';
-Toast.warn = '';
-Toast.success = '';
-Toast.error = '';
-Toast.loading = '';
+$.each(['info', 'ask', 'warn', 'success', 'error', 'loading'], function (index, type){
+  Toast[type] = function (message, options){
+    return new Toast(message, $.extend({}, options, { type: type }));
+  };
+});
 
 // 公开接口
 module.exports = Toast;
