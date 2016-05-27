@@ -9,9 +9,35 @@
         width: 100%; height: 100%;
         background: url(./images/header-bg.jpg);
       }
+      .ui-button {
+        display: inline-block;
+        *display: inline; *zoom: 1;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+      }
+      .ui-button-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+      }
     </style>
   </head>
   <body>
+    <button id="button" class="ui-button ui-button-success">打开提示框</button>
     <script type="text/javascript">
       if (!console) {
         console.log = function (){};
@@ -21,16 +47,18 @@
         base: './examples'
       });
 
-      seajs.use('./examples/toast', function (Toast){
+      seajs.use(['./examples/jquery', './examples/toast'], function ($, Toast){
         function handler(){
           console.log('提示类型：', this.type, '>>>', '触发事件：', arguments[0], '>>>', '回调参数：', arguments[1]);
         }
 
-        Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
-          Toast.success('言宜慢，心宜善。')
-            .on('show', handler)
-            .on('hide', handler);
-        }).on('lock', handler).on('unlock', handler);
+        $('#button').on('click', function (){
+          Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
+            Toast.success('言宜慢，心宜善。')
+              .on('show', handler)
+              .on('hide', handler);
+          }).on('lock', handler).on('unlock', handler);
+        });
       });
     </script>
   </body>
