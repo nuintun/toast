@@ -46,6 +46,8 @@ var Cache = {
 };
 
 function Toast(message, options){
+  if (!(this instanceof Toast)) return new Toast(message, options);
+  
   message = message || '言宜慢，心宜善。';
   options = $.extend({ id: GUID, lock: false, type: 'info', timeout: 3000 }, options);
   options.timeout = Math.abs(Number(options.timeout)) || 3000;
