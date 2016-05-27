@@ -61,7 +61,7 @@ function Toast(message, options){
   options.timeout = Math.abs(Number(options.timeout)) || 3000;
 
   if (Cache.has(options.id)) {
-    Cache.get(options.id).hide();
+    Cache.get(options.id).hide('DUPLICATE');
   }
 
   this.events = {};
