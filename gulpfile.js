@@ -267,7 +267,7 @@ gulp.task('runtime-product', ['clean'], function (){
 // develop task
 gulp.task('default', ['runtime'], function (){
   // complete callback
-  var complete = pedding(3, function (){
+  var complete = pedding(1, function (){
     var now = new Date();
 
     console.log(
@@ -355,7 +355,7 @@ gulp.task('watch', ['default'], function (){
 // product task
 gulp.task('product', ['runtime-product'], function (){
   // complete callback
-  var complete = pedding(3, function (){
+  var complete = pedding(1, function (){
     var now = new Date();
 
     console.log(
