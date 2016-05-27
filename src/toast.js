@@ -78,9 +78,9 @@ function Toast(message, options){
     '</div>'
   );
 
-  Cache.add(options.id, this);
-
   this.show('INITIALIZE');
+
+  Cache.add(options.id, this);
 }
 
 Toast.prototype = {
@@ -161,9 +161,7 @@ Toast.prototype = {
         delete this.events[event];
         break;
       default:
-        if (this.events[event]) {
-          this.events[event].remove(handler);
-        }
+        this.events[event] && this.events[event].remove(handler);
         break;
     }
 
