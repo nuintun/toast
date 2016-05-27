@@ -45,8 +45,8 @@
   line-height: 24px;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -webkit-animation-duration: .23s;
-  animation-duration: .23s;
+  -webkit-animation-duration: .16s;
+  animation-duration: .16s;
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn
 }
