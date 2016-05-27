@@ -6,7 +6,8 @@
 
 require('./css/toast.css');
 
-var $ = require('./jquery');
+var $ = require('jquery');
+
 var GUID = new Date().getTime();
 
 var Mask = {
@@ -30,28 +31,17 @@ var Mask = {
 
 var Cache = {
   cache: {},
-  key: function (key){
-    return 'Toast-ID-' + key;
-  },
   add: function (key, value){
-    key = Cache.key(key);
-
     Cache.cache[key] = value;
   },
   remove: function (key){
-    key = Cache.key(key);
-
     delete Cache.cache[key];
   },
   has: function (key){
-    key = Cache.key(key);
-
     return Cache.cache.hasOwnProperty(key);
   },
   get: function (key){
-    key = Cache.key(key);
-
-    return Cache.cache[key]
+    return Cache.cache[key];
   }
 };
 
