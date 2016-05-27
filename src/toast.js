@@ -64,8 +64,6 @@ function Toast(message, options){
     Cache.get(options.id).hide();
   }
 
-  Cache.add(options.id, this);
-
   this.events = {};
   this.locked = false;
   this.id = options.id;
@@ -79,6 +77,8 @@ function Toast(message, options){
     '  </div>' +
     '</div>'
   );
+
+  Cache.add(options.id, this);
 
   this.show('INITIALIZE');
 }
