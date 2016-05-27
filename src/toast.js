@@ -45,6 +45,14 @@ var Cache = {
   }
 };
 
+function emit(context, event, args){
+  args = [].slice.call(args, 0);
+
+  args.unshift(event);
+
+  context.emit.apply(context, args);
+}
+
 function Toast(message, options){
   if (!(this instanceof Toast)) return new Toast(message, options);
 
@@ -74,14 +82,6 @@ function Toast(message, options){
   this.show('INITIALIZE');
 
   Cache.add(options.id, this);
-}
-
-function emit(context, event, args){
-  args = [].slice.call(args, 0);
-
-  args.unshift(event);
-
-  context.emit.apply(context, args);
 }
 
 Toast.prototype = {
