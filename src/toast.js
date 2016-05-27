@@ -190,13 +190,5 @@ Toast.success = '';
 Toast.error = '';
 Toast.loading = '';
 
-new Toast('正在加载数据...', { lock: true, type: 'loading' }).on('hide', function (){
-  new Toast('言宜慢，心宜善。', { type: 'success' }).on('show', function (){
-    console.log('显示：', '言宜慢，心宜善。', '>>>', '触发对象：', arguments[0]);
-  }).on('hide', function (){
-    console.log('隐藏：', '言宜慢，心宜善。', '>>>', '触发对象：', arguments[0]);
-  });
-});
-
 // 公开接口
 module.exports = Toast;
