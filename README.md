@@ -23,8 +23,8 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 
 ###API
 #### new Toast(message, options) ```constructor```
-######  *message* ```String``` 消息文本
-######  *options* ```Object``` 配置提示框参数
+#####  *message* ```String``` 消息文本
+#####  *options* ```Object``` 配置提示框参数
 - id ```Number | String```
 
   提示框身份标识，相同身份标识的提示框不能共存。
