@@ -47,7 +47,7 @@ var Cache = {
 
 function Toast(message, options){
   if (!(this instanceof Toast)) return new Toast(message, options);
-  
+
   message = message || '言宜慢，心宜善。';
   options = $.extend({ id: GUID, lock: false, type: 'info', timeout: 3000 }, options);
   options.timeout = Math.abs(Number(options.timeout)) || 3000;
@@ -61,6 +61,7 @@ function Toast(message, options){
   this.id = options.id;
   this.options = options;
   this.visibility = false;
+  this.type = options.type;
 
   this.toast = $(
     '<div class="ui-toast ui-toast-type-' + options.type + '">' +
@@ -75,11 +76,21 @@ function Toast(message, options){
   Cache.add(options.id, this);
 }
 
+function emit(context, event, args){
+  args = [].slice.call(args, 0);
+
+  args.unshift(event);
+
+  context.emit.apply(context, args);
+}
+
 Toast.prototype = {
   lock: function (){
     Mask.show();
 
     this.locked = true;
+
+    emit(this, 'lock', arguments);
 
     return this;
   },
@@ -88,6 +99,8 @@ Toast.prototype = {
       Mask.hide();
 
       this.locked = false;
+
+      emit(this, 'unlock', arguments);
     }
 
     return this;
@@ -96,7 +109,7 @@ Toast.prototype = {
     if (!this.visibility) {
       var context = this;
 
-      this.options.lock && this.lock();
+      this.options.lock && this.lock.apply(this, arguments);
       this.toast.appendTo(document.body);
 
       this.visibility = true;
@@ -109,29 +122,21 @@ Toast.prototype = {
         }, this.options.timeout);
       }
 
-      var args = [].slice.call(arguments, 0);
-
-      args.unshift('show');
-
-      this.emit.apply(this, args);
+      emit(this, 'show', arguments);
     }
 
     return this;
   },
   hide: function (){
     if (this.visibility) {
-      this.unlock();
+      this.unlock.apply(this, arguments);
       this.toast.remove();
 
       this.visibility = false;
 
       clearTimeout(this.timer);
 
-      var args = [].slice.call(arguments, 0);
-
-      args.unshift('hide');
-
-      this.emit.apply(this, args);
+      emit(this, 'hide', arguments);
     }
 
     return this;
@@ -160,7 +165,7 @@ Toast.prototype = {
     return this;
   },
   emit: function (event){
-    var data = [].slice.call(arguments, 1);
+    var data = [].slice.call(arguments, 0);
 
     this.events[event] = this.events[event]
       || $.Callbacks('memory stopOnFalse');
