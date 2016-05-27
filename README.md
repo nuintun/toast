@@ -23,8 +23,8 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 
 ###API
 #### new Toast(message, options) ```constructor```
-#####  *message* ```String``` 消息文本
-#####  *options* ```Object``` 配置提示框参数
+######  *message* ```String``` 消息文本
+######  *options* ```Object``` 配置提示框参数
 - id ```Number | String```
 
   提示框身份标识，相同身份标识的提示框不能共存。
@@ -42,6 +42,7 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 
   自动关闭提示框时间，默认 ```3000``` 毫秒，如果为 ```0``` 则不关闭提示框。
 
+#### attribute & method ```attribute & method```
 ##### id ```attribute``` 提示框身份标识 ```readonly```
 ##### locked ```attribute``` 提示框锁定状态 ```readonly```
 ##### visibility ```attribute``` 提示框可见状态 ```readonly```
@@ -53,6 +54,15 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 ##### on```method``` 绑定事件监听
 ##### off ```method``` 移除事件监听
 ##### emit ```method``` 触发事件回调
+
+#### static method ```method```
+##### Toast.query```method``` 根据身份标识获取实例
+##### Toast.success ```method``` 成功提示框
+##### Toast.error ```method``` 错误提示框
+##### Toast.info ```method``` 消息提示框
+##### Toast.ask ```method``` 询问提示框
+##### Toast.warn ```method``` 警告提示框
+##### Toast.loading ```method``` 加载提示框
 
 ###Demo
 ####[在线实例](https://github.com/nuintun/toast/index.html)
