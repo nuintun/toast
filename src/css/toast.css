@@ -12,6 +12,26 @@
   margin: 0; padding: 0;
   pointer-events: visiblepainted;
 }
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .ui-toast-message {
   padding: 7px 10px 7px 44px;
   margin: 0; color: #222;
@@ -23,6 +43,12 @@
   font-size: 15px;
   font-weight: bold;
   line-height: 24px;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: .23s;
+  animation-duration: .23s;
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn
 }
 .ui-toast-type-info { background-image: url(../images/info.png); }
 .ui-toast-type-success { background-image: url(../images/success.png); }
