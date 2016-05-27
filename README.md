@@ -56,7 +56,7 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 ##### emit ```method``` 触发事件回调
 
 #### static method ```method```
-##### Toast.query```method``` 根据身份标识获取实例
+##### Toast.query```method``` 根据身份标识获取提示框实例
 ##### Toast.success ```method``` 成功提示框
 ##### Toast.error ```method``` 错误提示框
 ##### Toast.info ```method``` 消息提示框
