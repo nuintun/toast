@@ -61,9 +61,9 @@ function Toast(message, options){
   this.visibility = false;
 
   this.toast = $(
-    '<div class="ui-toast">' +
+    '<div class="ui-toast ui-toast-type-' + options.type + '">' +
     '  <div>' +
-    '    <div class="ui-toast-message ui-toast-type-' + options.type + '">' + message + '</div>' +
+    '    <div class="ui-toast-message">' + message + '</div>' +
     '  </div>' +
     '</div>'
   );

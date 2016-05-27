@@ -50,15 +50,15 @@
   -webkit-animation-name: zoomIn;
   animation-name: zoomIn
 }
-.ui-toast-type-info { background-image: url(../images/info.png); }
-.ui-toast-type-success { background-image: url(../images/success.png); }
-.ui-toast-type-error { background-image: url(../images/error.png); }
-.ui-toast-type-warn { background-image: url(../images/warn.png); }
-.ui-toast-type-ask { background-image: url(../images/ask.png); }
-.ui-toast-type-lock { background-image: url(../images/lock.png); }
-.ui-toast-type-sad { background-image: url(../images/sad.png); }
-.ui-toast-type-smile { background-image: url(../images/smile.png); }
-.ui-toast-type-loading { background-image: url(../images/loading.gif); }
+.ui-toast-type-info .ui-toast-message { background-image: url(../images/info.png); }
+.ui-toast-type-success .ui-toast-message { background-image: url(../images/success.png); }
+.ui-toast-type-error .ui-toast-message { background-image: url(../images/error.png); }
+.ui-toast-type-warn .ui-toast-message { background-image: url(../images/warn.png); }
+.ui-toast-type-ask .ui-toast-message { background-image: url(../images/ask.png); }
+.ui-toast-type-lock .ui-toast-message { background-image: url(../images/lock.png); }
+.ui-toast-type-sad .ui-toast-message { background-image: url(../images/sad.png); }
+.ui-toast-type-smile .ui-toast-message { background-image: url(../images/smile.png); }
+.ui-toast-type-loading .ui-toast-message { background-image: url(../images/loading.gif); }
 .ui-toast-mask {
   width: 100%;
   height: 100%;
