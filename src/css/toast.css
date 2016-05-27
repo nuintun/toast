@@ -69,3 +69,6 @@
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
 }
+:root .ui-toast-mask {
+  filter: none \9;
+}
