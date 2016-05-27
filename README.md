@@ -11,7 +11,11 @@ new Toast('言宜慢，心宜善。');
 new Toast('言宜慢，心宜善。', { type: 'smile', lock: true });
 
 function handler(){
-  console.log('提示类型：', this.type, '>>>', '触发事件：', arguments[0], '>>>', '回调参数：', arguments[1]);
+  console.log(
+    '提示类型：', this.type,
+    '>>>', '触发事件：', arguments[0],
+    '>>>', '回调参数：', arguments[1]
+  );
 }
 
 Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
