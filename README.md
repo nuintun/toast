@@ -42,10 +42,10 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 
   自动关闭提示框时间，默认 ```3000``` 毫秒，如果为 ```0``` 则不关闭提示框。
 
-#### id ```attribute``` 提示框身份标识 ```readonly```
-#### locked ```attribute``` 提示框锁定状态 ```readonly```
-#### visibility ```attribute``` 提示框可见状态 ```readonly```
-#### type ```attribute``` 提示框类型 ```readonly```
+##### id ```attribute``` 提示框身份标识 ```readonly```
+##### locked ```attribute``` 提示框锁定状态 ```readonly```
+##### visibility ```attribute``` 提示框可见状态 ```readonly```
+##### type ```attribute``` 提示框类型 ```readonly```
 ##### show ```method``` 显示提示框并触发 ```show``` 事件，参数可选
 ##### hide```method``` 隐藏提示框并触发 ```hide``` 事件，参数可选
 ##### lock```method``` 显示遮罩层并触发 ```lock``` 事件，参数可选
