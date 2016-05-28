@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Toast</title>
     <script type="text/javascript" src="./examples/sea.js"></script>
     <style type="text/css">
       body {
@@ -62,7 +62,7 @@
             Toast.success('言宜慢，心宜善。')
               .on('show', handler)
               .on('hide', handler);
-          }).on('lock', handler).on('unlock', handler);
+          }).on('show', handler).on('hide', handler).on('lock', handler).on('unlock', handler);
         });
       });
     </script>
