@@ -92,7 +92,7 @@ function Toast(message, options){
 
 Toast.prototype = {
   lock: function (){
-    Mask.show();
+    Mask.show(this.toast);
 
     this.locked = true;
 
@@ -102,7 +102,7 @@ Toast.prototype = {
   },
   unlock: function (){
     if (this.locked) {
-      Mask.hide();
+      Mask.hide(this.toast);
 
       this.locked = false;
 
