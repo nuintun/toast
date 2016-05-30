@@ -11,20 +11,25 @@ var $ = require('jquery');
 var GUID = new Date().getTime();
 
 var Mask = {
-  reference: 0,
+  reference: [],
   mask: $('<div class="ui-toast-mask"></div>'),
-  show: function (){
-    if (Mask.reference === 0) {
-      Mask.mask.appendTo(document.body);
+  show: function (target){
+    if ($.inArray(target, Mask.reference) === -1) {
+      Mask.reference.push(target);
+      Mask.mask.insertBefore(target);
     }
-
-    Mask.reference++;
   },
-  hide: function (){
-    Mask.reference--;
+  hide: function (target){
+    Mask.reference = $.grep(Mask.reference, function (element){
+      return target !== element;
+    });
 
-    if (Mask.reference === 0) {
+    var length = Mask.reference.length;
+
+    if (length === 0) {
       Mask.mask.remove();
+    } else {
+      Mask.mask.insertBefore(Mask.reference[length - 1]);
     }
   }
 };
@@ -58,7 +63,8 @@ function Toast(message, options){
 
   message = message || '言宜慢，心宜善。';
   options = $.extend({ id: GUID, lock: false, type: 'info', timeout: 3000 }, options);
-  options.timeout = Math.abs(Number(options.timeout)) || 3000;
+  options.timeout = Math.abs(Number(options.timeout));
+  options.timeout = isNaN(options.timeout) ? 3000 : options.timeout;
 
   if (Cache.has(options.id)) {
     Cache.get(options.id).hide('DUPLICATE');
@@ -109,8 +115,8 @@ Toast.prototype = {
     if (!this.visibility) {
       var context = this;
 
-      this.options.lock && this.lock.apply(this, arguments);
       this.toast.appendTo(document.body);
+      this.options.lock && this.lock.apply(this, arguments);
 
       this.visibility = true;
 
