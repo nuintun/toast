@@ -39,10 +39,15 @@
       body > button {
         margin-top: 88px;
       }
+      .ui-help {
+        padding: 16px;
+        color: #ff0;
+      }
     </style>
   </head>
   <body>
     <button id="button" class="ui-button ui-button-success">打开提示框</button>
+    <div class="ui-help">按F12打开控制台可以查看事件回调</div>
     <script type="text/javascript">
       if (!console) {
         console.log = function (){};
