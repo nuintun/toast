@@ -92,7 +92,7 @@ function Toast(message, options){
 
 Toast.prototype = {
   lock: function (){
-    Mask.show();
+    Mask.show(this.toast);
 
     this.locked = true;
 
@@ -102,7 +102,7 @@ Toast.prototype = {
   },
   unlock: function (){
     if (this.locked) {
-      Mask.hide();
+      Mask.hide(this.toast);
 
       this.locked = false;
 
@@ -115,8 +115,8 @@ Toast.prototype = {
     if (!this.visibility) {
       var context = this;
 
-      this.options.lock && this.lock.apply(this, arguments);
       this.toast.appendTo(document.body);
+      this.options.lock && this.lock.apply(this, arguments);
 
       this.visibility = true;
 
