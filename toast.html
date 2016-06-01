@@ -64,10 +64,12 @@
 
         $('#button').on('click', function (){
           Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
+            handler();
+
             Toast.success('言宜慢，心宜善。')
               .on('show', handler)
               .on('hide', handler);
-          }).on('show', handler).on('hide', handler).on('lock', handler).on('unlock', handler);
+          }).on('show', handler).on('lock', handler).on('unlock', handler);
         });
       });
     </script>
