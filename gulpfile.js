@@ -47,7 +47,13 @@ function compress(){
   }, {
     js: switchStream.through(function (vinyl, encoding, next){
       try {
-        var result = uglify.minify(vinyl.contents.toString(), { fromString: true });
+        var result = uglify.minify(vinyl.contents.toString(), {
+          fromString: true,
+          compress: { screw_ie8: false },
+          mangle: { screw_ie8: false },
+          output: { screw_ie8: false }
+        });
+        
         vinyl.contents = new Buffer(result.code);
       } catch (error) {
         // no nothing
@@ -93,7 +99,13 @@ var CMDPLUGINS = {
 
       cmd.defaults.plugins.css.exec(vinyl, options, function (vinyl){
         try {
-          var result = uglify.minify(vinyl.contents.toString(), { fromString: true });
+          var result = uglify.minify(vinyl.contents.toString(), {
+            fromString: true,
+            compress: { screw_ie8: false },
+            mangle: { screw_ie8: false },
+            output: { screw_ie8: false }
+          });
+
           vinyl.contents = new Buffer(result.code);
         } catch (error) {
           // no nothing
@@ -112,7 +124,13 @@ var CMDPLUGINS = {
     // transform
     cmd.defaults.plugins[name].exec(vinyl, options, function (vinyl){
       try {
-        var result = uglify.minify(vinyl.contents.toString(), { fromString: true });
+        var result = uglify.minify(vinyl.contents.toString(), {
+          fromString: true,
+          compress: { screw_ie8: false },
+          mangle: { screw_ie8: false },
+          output: { screw_ie8: false }
+        });
+
         vinyl.contents = new Buffer(result.code);
       } catch (error) {
         // no nothing
