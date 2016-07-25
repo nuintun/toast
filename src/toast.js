@@ -51,9 +51,7 @@ var Cache = {
 };
 
 function emit(context, event, args){
-  args = [].slice.call(args, 0);
-
-  args.unshift(event);
+  [].unshift.call(args, event, event);
 
   context.emit.apply(context, args);
 }
@@ -171,7 +169,7 @@ Toast.prototype = {
     return this;
   },
   emit: function (event){
-    var data = [].slice.call(arguments, 0);
+    var data = [].slice.call(arguments, 1);
 
     this.events[event] = this.events[event]
       || $.Callbacks('memory stopOnFalse');
