@@ -69,4 +69,4 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 ##### Toast.loading ```method``` 加载提示框
 
 ###Demo
-#### [在线实例](http://nuintun.github.io/toast/toast.html)
+#### [在线实例](https://nuintun.github.io/toast/toast.html)
