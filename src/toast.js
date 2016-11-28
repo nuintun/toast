@@ -14,7 +14,7 @@ var Mask = {
   // 遮罩分配
   alloc: [],
   // 遮罩节点
-  node: $('<div class="ui-dialog-mask" tableindex="0"></div>'),
+  node: $('<div class="ui-toast-mask" tableindex="0"></div>'),
   /**
    * 显示遮罩
    * @param {HTMLElement} anchor 定位节点
