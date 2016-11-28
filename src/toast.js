@@ -11,52 +11,62 @@ var $ = require('jquery');
 var GUID = new Date().getTime();
 
 var Mask = {
-  reference: [],
-  mask: $('<div class="ui-toast-mask"></div>'),
-  show: function (target){
-    if ($.inArray(target, Mask.reference) === -1) {
-      Mask.reference.push(target);
-      Mask.mask.insertBefore(target);
+  // 遮罩分配
+  alloc: [],
+  // 遮罩节点
+  node: $('<div class="ui-dialog-mask" tableindex="0"></div>'),
+  /**
+   * 显示遮罩
+   * @param {HTMLElement} anchor 定位节点
+   */
+  show: function(anchor) {
+    if (Utils.indexOf(Mask.alloc, anchor) === -1) {
+      Mask.alloc.push(anchor);
+      Mask.node.insertBefore(anchor);
     }
   },
-  hide: function (target){
-    Mask.reference = $.grep(Mask.reference, function (element){
-      return target !== element;
+  /**
+   * 隐藏遮罩
+   * @param {HTMLElement} anchor 定位节点
+   */
+  hide: function(anchor) {
+    Mask.alloc = Utils.filter(Mask.alloc, function(element) {
+      return anchor !== element;
     });
 
-    var length = Mask.reference.length;
+    var length = Mask.alloc.length;
 
     if (length === 0) {
-      Mask.mask.remove();
+      Mask.node.remove();
     } else {
-      Mask.mask.insertBefore(Mask.reference[length - 1]);
+      Mask.node.insertBefore(Mask.alloc[length - 1]);
     }
   }
 };
 
 var Cache = {
-  cache: {},
-  add: function (key, value){
-    Cache.cache[key] = value;
+  items: {},
+  add: function(key, value) {
+    Cache.items[key] = value;
   },
-  remove: function (key){
-    delete Cache.cache[key];
+  remove: function(key) {
+    delete Cache.items[key];
   },
-  has: function (key){
-    return Cache.cache.hasOwnProperty(key);
+  has: function(key) {
+    return Cache.items.hasOwnProperty(key);
   },
-  get: function (key){
-    return Cache.cache[key];
+  get: function(key) {
+    return Cache.items[key];
   }
 };
 
-function emit(context, event, args){
+function emit(context, event, args) {
   [].unshift.call(args, event, event);
 
   context.emit.apply(context, args);
 }
 
-function Toast(message, options){
+function Toast(message, options) {
   if (!(this instanceof Toast)) return new Toast(message, options);
 
   message = message || '言宜慢，心宜善。';
@@ -89,7 +99,7 @@ function Toast(message, options){
 }
 
 Toast.prototype = {
-  lock: function (){
+  lock: function() {
     Mask.show(this.toast);
 
     this.locked = true;
@@ -98,7 +108,7 @@ Toast.prototype = {
 
     return this;
   },
-  unlock: function (){
+  unlock: function() {
     if (this.locked) {
       Mask.hide(this.toast);
 
@@ -109,7 +119,7 @@ Toast.prototype = {
 
     return this;
   },
-  show: function (){
+  show: function() {
     if (!this.visibility) {
       var context = this;
 
@@ -121,7 +131,7 @@ Toast.prototype = {
       if (this.options.timeout > 0) {
         clearTimeout(this.timer);
 
-        this.timer = setTimeout(function (){
+        this.timer = setTimeout(function() {
           context.hide('TIMEOUT');
         }, this.options.timeout);
       }
@@ -131,7 +141,7 @@ Toast.prototype = {
 
     return this;
   },
-  hide: function (){
+  hide: function() {
     if (this.visibility) {
       this.unlock.apply(this, arguments);
       this.toast.remove();
@@ -145,15 +155,15 @@ Toast.prototype = {
 
     return this;
   },
-  on: function (event, handler){
-    this.events[event] = this.events[event]
-      || $.Callbacks('memory stopOnFalse');
+  on: function(event, handler) {
+    this.events[event] = this.events[event] ||
+      $.Callbacks('memory stopOnFalse');
 
     this.events[event].add(handler);
 
     return this;
   },
-  off: function (event, handler){
+  off: function(event, handler) {
     switch (arguments.length) {
       case 0:
         this.events = {};
@@ -168,11 +178,11 @@ Toast.prototype = {
 
     return this;
   },
-  emit: function (event){
+  emit: function(event) {
     var data = [].slice.call(arguments, 1);
 
-    this.events[event] = this.events[event]
-      || $.Callbacks('memory stopOnFalse');
+    this.events[event] = this.events[event] ||
+      $.Callbacks('memory stopOnFalse');
 
     this.events[event].fireWith(this, data);
 
@@ -182,8 +192,8 @@ Toast.prototype = {
 
 Toast.query = Cache.get;
 
-$.each(['info', 'ask', 'warn', 'success', 'error', 'loading'], function (index, type){
-  Toast[type] = function (message, options){
+$.each(['info', 'ask', 'warn', 'success', 'error', 'loading'], function(index, type) {
+  Toast[type] = function(message, options) {
     return new Toast(message, $.extend({}, options, { type: type }));
   };
 });
