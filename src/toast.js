@@ -14,13 +14,13 @@ var Mask = {
   // 遮罩分配
   alloc: [],
   // 遮罩节点
-  node: $('<div class="ui-dialog-mask" tableindex="0"></div>'),
+  node: $('<div class="ui-toast-mask" tableindex="0"></div>'),
   /**
    * 显示遮罩
    * @param {HTMLElement} anchor 定位节点
    */
   show: function(anchor) {
-    if (Utils.indexOf(Mask.alloc, anchor) === -1) {
+    if ($.inArray(anchor, Mask.alloc) === -1) {
       Mask.alloc.push(anchor);
       Mask.node.insertBefore(anchor);
     }
@@ -30,7 +30,7 @@ var Mask = {
    * @param {HTMLElement} anchor 定位节点
    */
   hide: function(anchor) {
-    Mask.alloc = Utils.filter(Mask.alloc, function(element) {
+    Mask.alloc = $.grep(Mask.alloc, function(element) {
       return anchor !== element;
     });
 
