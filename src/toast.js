@@ -14,7 +14,7 @@ var Mask = {
   // 遮罩分配
   alloc: [],
   // 遮罩节点
-  node: $('<div class="ui-toast-mask" tableindex="0"></div>'),
+  node: $('<div role="tooltip" class="ui-toast-mask" tableindex="0"></div>'),
   /**
    * 显示遮罩
    * @param {HTMLElement} anchor 定位节点
@@ -67,7 +67,9 @@ function emit(context, event, args) {
 }
 
 function Toast(message, options) {
-  if (!(this instanceof Toast)) return new Toast(message, options);
+  var context = this;
+
+  if (!(context instanceof Toast)) return new Toast(message, options);
 
   message = message || '言宜慢，心宜善。';
   options = $.extend({ id: GUID, lock: false, type: 'info', timeout: 3000 }, options);
@@ -78,14 +80,14 @@ function Toast(message, options) {
     Cache.get(options.id).hide('DUPLICATE');
   }
 
-  this.events = {};
-  this.locked = false;
-  this.id = options.id;
-  this.options = options;
-  this.visibility = false;
-  this.type = options.type;
+  context.events = {};
+  context.locked = false;
+  context.id = options.id;
+  context.options = options;
+  context.visibility = false;
+  context.type = options.type;
 
-  this.toast = $(
+  context.toast = $(
     '<div class="ui-toast ui-toast-type-' + options.type + '">' +
     '  <div>' +
     '    <div class="ui-toast-message">' + message + '</div>' +
@@ -93,100 +95,111 @@ function Toast(message, options) {
     '</div>'
   );
 
-  this.show('INITIALIZE');
+  context.show('INITIALIZE');
 
-  Cache.add(options.id, this);
+  Cache.add(options.id, context);
 }
 
 Toast.prototype = {
   lock: function() {
-    Mask.show(this.toast);
+    var context = this;
 
-    this.locked = true;
+    Mask.show(context.toast);
 
-    emit(this, 'lock', arguments);
+    context.locked = true;
 
-    return this;
+    emit(context, 'lock', arguments);
+
+    return context;
   },
   unlock: function() {
-    if (this.locked) {
-      Mask.hide(this.toast);
+    var context = this;
 
-      this.locked = false;
+    if (context.locked) {
+      Mask.hide(context.toast);
 
-      emit(this, 'unlock', arguments);
+      context.locked = false;
+
+      emit(context, 'unlock', arguments);
     }
 
-    return this;
+    return context;
   },
   show: function() {
-    if (!this.visibility) {
-      var context = this;
+    var context = this;
 
-      this.toast.appendTo(document.body);
-      this.options.lock && this.lock.apply(this, arguments);
+    if (!context.visibility) {
+      context.toast.appendTo(document.body);
+      context.options.lock && context.lock.apply(context, arguments);
 
-      this.visibility = true;
+      context.visibility = true;
 
-      if (this.options.timeout > 0) {
-        clearTimeout(this.timer);
+      if (context.options.timeout > 0) {
+        clearTimeout(context.timer);
 
-        this.timer = setTimeout(function() {
+        context.timer = setTimeout(function() {
           context.hide('TIMEOUT');
-        }, this.options.timeout);
+        }, context.options.timeout);
       }
 
-      emit(this, 'show', arguments);
+      emit(context, 'show', arguments);
     }
 
-    return this;
+    return context;
   },
   hide: function() {
-    if (this.visibility) {
-      this.unlock.apply(this, arguments);
-      this.toast.remove();
+    var context = this;
 
-      this.visibility = false;
+    if (context.visibility) {
+      context.unlock.apply(context, arguments);
+      context.toast.remove();
 
-      clearTimeout(this.timer);
+      context.visibility = false;
 
-      emit(this, 'hide', arguments);
+      clearTimeout(context.timer);
+
+      emit(context, 'hide', arguments);
     }
 
-    return this;
+    return context;
   },
   on: function(event, handler) {
-    this.events[event] = this.events[event] ||
+    var context = this;
+
+    context.events[event] = context.events[event] ||
       $.Callbacks('memory stopOnFalse');
 
-    this.events[event].add(handler);
+    context.events[event].add(handler);
 
-    return this;
+    return context;
   },
   off: function(event, handler) {
+    var context = this;
+
     switch (arguments.length) {
       case 0:
-        this.events = {};
+        context.events = {};
         break;
       case 1:
-        delete this.events[event];
+        delete context.events[event];
         break;
       default:
-        this.events[event] && this.events[event].remove(handler);
+        context.events[event] && context.events[event].remove(handler);
         break;
     }
 
-    return this;
+    return context;
   },
   emit: function(event) {
+    var context = this;
     var data = [].slice.call(arguments, 1);
 
-    this.events[event] = this.events[event] ||
+    context.events[event] = context.events[event] ||
       $.Callbacks('memory stopOnFalse');
 
-    this.events[event].fireWith(this, data);
+    context.events[event].fireWith(context, data);
 
-    return this;
+    return context;
   }
 };
 
