@@ -14,7 +14,7 @@ var Mask = {
   // 遮罩分配
   alloc: [],
   // 遮罩节点
-  node: $('<div role="tooltip" class="ui-toast-mask" tableindex="0"></div>'),
+  node: $('<div class="ui-toast-mask" tableindex="0"></div>'),
   /**
    * 显示遮罩
    * @param {HTMLElement} anchor 定位节点
@@ -88,7 +88,7 @@ function Toast(message, options) {
   context.type = options.type;
 
   context.toast = $(
-    '<div class="ui-toast ui-toast-type-' + options.type + '">' +
+    '<div role="tooltip" class="ui-toast ui-toast-type-' + options.type + '">' +
     '  <div>' +
     '    <div class="ui-toast-message">' + message + '</div>' +
     '  </div>' +
