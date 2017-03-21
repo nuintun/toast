@@ -4,7 +4,7 @@ toast
 
 >A toast plugin
 
-###Usage
+### Usage
 ```js
 new Toast('言宜慢，心宜善。');
 
@@ -25,7 +25,7 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 }).on('lock', handler).on('unlock', handler);
 ```
 
-###API
+### API
 #### new Toast(message, options) ```constructor```
 #####  *message* ```String``` 消息文本
 #####  *options* ```Object``` 配置提示框参数
@@ -68,5 +68,5 @@ Toast.loading('正在加载数据...', { lock: true }).on('hide', function (){
 ##### Toast.warn ```method``` 警告提示框
 ##### Toast.loading ```method``` 加载提示框
 
-###Demo
+### Demo
 #### [在线实例](https://nuintun.github.io/toast/toast.html)
