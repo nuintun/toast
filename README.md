@@ -1,6 +1,5 @@
 
-toast
-===========
+# toast
 
 >A toast plugin
 
