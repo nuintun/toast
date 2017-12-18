@@ -88,11 +88,15 @@ function Toast(message, options) {
   context.type = options.type;
 
   context.toast = $(
-    '<div role="tooltip" class="ui-toast ui-toast-type-' + options.type + '">' +
-    '  <div>' +
-    '    <div class="ui-toast-message">' + message + '</div>' +
-    '  </div>' +
-    '</div>'
+    '<div role="tooltip" class="ui-toast ui-toast-type-' +
+      options.type +
+      '">' +
+      '  <div>' +
+      '    <div class="ui-toast-message">' +
+      message +
+      '</div>' +
+      '  </div>' +
+      '</div>'
   );
 
   context.show('INITIALIZE');
@@ -166,8 +170,7 @@ Toast.prototype = {
   on: function(event, handler) {
     var context = this;
 
-    context.events[event] = context.events[event] ||
-      $.Callbacks('memory stopOnFalse');
+    context.events[event] = context.events[event] || $.Callbacks('memory stopOnFalse');
 
     context.events[event].add(handler);
 
@@ -194,8 +197,7 @@ Toast.prototype = {
     var context = this;
     var data = [].slice.call(arguments, 1);
 
-    context.events[event] = context.events[event] ||
-      $.Callbacks('memory stopOnFalse');
+    context.events[event] = context.events[event] || $.Callbacks('memory stopOnFalse');
 
     context.events[event].fireWith(context, data);
 
